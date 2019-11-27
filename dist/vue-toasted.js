@@ -73,7 +73,7 @@ return /******/ (function(modules) { // webpackBootstrap
 /******/ 	__webpack_require__.p = "/dist/";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 6);
+/******/ 	return __webpack_require__(__webpack_require__.s = 5);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -83,7 +83,7 @@ return /******/ (function(modules) { // webpackBootstrap
 "use strict";
 
 
-var randomFromSeed = __webpack_require__(19);
+var randomFromSeed = __webpack_require__(17);
 
 var ORIGINAL = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_-';
 var alphabet;
@@ -188,119 +188,26 @@ module.exports = {
 
 /***/ }),
 /* 1 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_animejs__ = __webpack_require__(5);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_animejs___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_animejs__);
-
-
-var duration = 300;
-
-/* harmony default export */ __webpack_exports__["a"] = ({
-    animateIn: function animateIn(el) {
-        __WEBPACK_IMPORTED_MODULE_0_animejs___default()({
-            targets: el,
-            translateY: '-35px',
-            opacity: 1,
-            duration: duration,
-            easing: 'easeOutCubic'
-        });
-    },
-    animateOut: function animateOut(el, onComplete) {
-        __WEBPACK_IMPORTED_MODULE_0_animejs___default()({
-            targets: el,
-            opacity: 0,
-            marginTop: '-40px',
-            duration: duration,
-            easing: 'easeOutExpo',
-            complete: onComplete
-        });
-    },
-    animateOutBottom: function animateOutBottom(el, onComplete) {
-        __WEBPACK_IMPORTED_MODULE_0_animejs___default()({
-            targets: el,
-            opacity: 0,
-            marginBottom: '-40px',
-            duration: duration,
-            easing: 'easeOutExpo',
-            complete: onComplete
-        });
-    },
-    animateReset: function animateReset(el) {
-        __WEBPACK_IMPORTED_MODULE_0_animejs___default()({
-            targets: el,
-            left: 0,
-            opacity: 1,
-            duration: duration,
-            easing: 'easeOutExpo'
-        });
-    },
-    animatePanning: function animatePanning(el, left, opacity) {
-        __WEBPACK_IMPORTED_MODULE_0_animejs___default()({
-            targets: el,
-            duration: 10,
-            easing: 'easeOutQuad',
-            left: left,
-            opacity: opacity
-        });
-    },
-    animatePanEnd: function animatePanEnd(el, onComplete) {
-        __WEBPACK_IMPORTED_MODULE_0_animejs___default()({
-            targets: el,
-            opacity: 0,
-            duration: duration,
-            easing: 'easeOutExpo',
-            complete: onComplete
-        });
-    },
-    clearAnimation: function clearAnimation(toasts) {
-
-        var timeline = __WEBPACK_IMPORTED_MODULE_0_animejs___default.a.timeline();
-
-        toasts.forEach(function (t) {
-            timeline.add({
-                targets: t.el,
-                opacity: 0,
-                right: '-40px',
-                duration: 300,
-                offset: '-=150',
-                easing: 'easeOutExpo',
-                complete: function complete() {
-                    t.remove();
-                }
-            });
-        });
-    }
-});
-
-/***/ }),
-/* 2 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
-module.exports = __webpack_require__(16);
+module.exports = __webpack_require__(14);
 
 
 /***/ }),
-/* 3 */
+/* 2 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return Toasted; });
 /* unused harmony export _show */
 /* unused harmony export initiateCustomToasts */
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__show__ = __webpack_require__(8);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__animations__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__show__ = __webpack_require__(7);
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 
-
-var uuid = __webpack_require__(2);
-
-// add Object.assign Polyfill
-__webpack_require__(11).polyfill();
+var uuid = __webpack_require__(1);
 
 /**
  * Toast
@@ -336,7 +243,7 @@ var Toasted = function Toasted(_options) {
 	/**
   * All Registered Groups
   */
-	this.groups = [];
+	// this.groups = []
 
 	/**
   * All Registered Toasts
@@ -359,41 +266,6 @@ var Toasted = function Toasted(_options) {
 	initiateCustomToasts(this);
 
 	/**
-  * Create New Group of Toasts
-  *
-  * @param o
-  */
-	this.group = function (o) {
-
-		if (!o) o = {};
-
-		if (!o.globalToasts) {
-			o.globalToasts = {};
-		}
-
-		// share parents global toasts
-		Object.assign(o.globalToasts, _this.global);
-
-		// tell parent about the group
-		var group = new Toasted(o);
-		_this.groups.push(group);
-
-		return group;
-	};
-
-	/**
-  * Register a Global Toast
-  *
-  * @param name
-  * @param payload
-  * @param options
-  */
-	this.register = function (name, payload, options) {
-		options = options || {};
-		return register(_this, name, payload, options);
-	};
-
-	/**
   * Show a Simple Toast
   *
   * @param message
@@ -401,45 +273,6 @@ var Toasted = function Toasted(_options) {
   * @returns {*}
   */
 	this.show = function (message, options) {
-		return _show(_this, message, options);
-	};
-
-	/**
-  * Show a Toast with Success Style
-  *
-  * @param message
-  * @param options
-  * @returns {*}
-  */
-	this.success = function (message, options) {
-		options = options || {};
-		options.type = "success";
-		return _show(_this, message, options);
-	};
-
-	/**
-  * Show a Toast with Info Style
-  *
-  * @param message
-  * @param options
-  * @returns {*}
-  */
-	this.info = function (message, options) {
-		options = options || {};
-		options.type = "info";
-		return _show(_this, message, options);
-	};
-
-	/**
-  * Show a Toast with Error Style
-  *
-  * @param message
-  * @param options
-  * @returns {*}
-  */
-	this.error = function (message, options) {
-		options = options || {};
-		options.type = "error";
 		return _show(_this, message, options);
 	};
 
@@ -452,20 +285,6 @@ var Toasted = function Toasted(_options) {
 			return t.el.hash !== el.hash;
 		});
 		if (el.parentNode) el.parentNode.removeChild(el);
-	};
-
-	/**
-  * Clear All Toasts
-  *
-  * @returns {boolean}
-  */
-	this.clear = function (onClear) {
-		__WEBPACK_IMPORTED_MODULE_1__animations__["a" /* default */].clearAnimation(_this.toasts, function () {
-			onClear && onClear();
-		});
-		_this.toasts = [];
-
-		return true;
 	};
 
 	return this;
@@ -484,16 +303,10 @@ var _show = function _show(instance, message, options) {
 	options = options || {};
 	var toast = null;
 
-	if ((typeof options === 'undefined' ? 'undefined' : _typeof(options)) !== "object") {
-		console.error("Options should be a type of object. given : " + options);
-		return null;
-	}
+	if ((typeof options === 'undefined' ? 'undefined' : _typeof(options)) !== "object") return null;
 
-	// singleton feature
-	if (instance.options.singleton && instance.toasts.length > 0) {
-		instance.cached_options = options;
-		instance.toasts[instance.toasts.length - 1].goAway(0);
-	}
+	// toaster limited
+	if (instance.toasts.length > 4) instance.toasts[0].goAway(0);
 
 	// clone the global options
 	var _options = Object.assign({}, instance.options);
@@ -537,7 +350,6 @@ var initiateCustomToasts = function initiateCustomToasts(instance) {
 				var payload = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
 
-				//console.log(payload);
 				// return the it in order to expose the Toast methods
 				return customToasts[key].apply(null, [payload, initiate]);
 			};
@@ -557,40 +369,17 @@ var initiateToastContainer = function initiateToastContainer(instance) {
 	instance.container = container;
 };
 
-var register = function register(instance, name, callback, options) {
-
-	!instance.options.globalToasts ? instance.options.globalToasts = {} : null;
-
-	instance.options.globalToasts[name] = function (payload, initiate) {
-
-		// if call back is string we will keep it that way..
-		var message = null;
-
-		if (typeof callback === 'string') {
-			message = callback;
-		}
-
-		if (typeof callback === 'function') {
-			message = callback(payload);
-		}
-
-		return initiate(message, options);
-	};
-
-	initiateCustomToasts(instance);
-};
-
 /* unused harmony default export */ var _unused_webpack_default_export = ({ Toasted: Toasted });
 
 /***/ }),
-/* 4 */
+/* 3 */
 /***/ (function(module, exports, __webpack_require__) {
 
 
 /* styles */
-__webpack_require__(22)
+__webpack_require__(20)
 
-var Component = __webpack_require__(21)(
+var Component = __webpack_require__(19)(
   /* script */
   null,
   /* template */
@@ -605,7 +394,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 5 */
+/* 4 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(global) {var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*
@@ -644,16 +433,16 @@ n)k=l;else{var l=h,h=h+.1,g=0;do m=l+(h-l)/2,n=a(m,c,b)-k,0<n?h=m:l=m;while(1e-7
 d:A.apply($jscomp$this,d)}}(f)),f={type:f.type};return b}(),ha={css:function(a,c,d){return a.style[c]=d},attribute:function(a,c,d){return a.setAttribute(c,d)},object:function(a,c,d){return a[c]=d},transform:function(a,c,d,b,f){b[f]||(b[f]=[]);b[f].push(c+"("+d+")")}},v=[],B=0,ia=function(){function a(){B=requestAnimationFrame(c)}function c(c){var b=v.length;if(b){for(var d=0;d<b;)v[d]&&v[d].tick(c),d++;a()}else cancelAnimationFrame(B),B=0}return a}();q.version="2.2.0";q.speed=1;q.running=v;q.remove=
 function(a){a=P(a);for(var c=v.length;c--;)for(var d=v[c],b=d.animations,f=b.length;f--;)u(a,b[f].animatable.target)&&(b.splice(f,1),b.length||d.pause())};q.getValue=K;q.path=function(a,c){var d=h.str(a)?e(a)[0]:a,b=c||100;return function(a){return{el:d,property:a,totalLength:N(d)*(b/100)}}};q.setDashoffset=function(a){var c=N(a);a.setAttribute("stroke-dasharray",c);return c};q.bezier=A;q.easings=Q;q.timeline=function(a){var c=q(a);c.pause();c.duration=0;c.add=function(d){c.children.forEach(function(a){a.began=
 !0;a.completed=!0});m(d).forEach(function(b){var d=z(b,D(S,a||{}));d.targets=d.targets||a.targets;b=c.duration;var e=d.offset;d.autoplay=!1;d.direction=c.direction;d.offset=h.und(e)?b:L(e,b);c.began=!0;c.completed=!0;c.seek(d.offset);d=q(d);d.began=!0;d.completed=!0;d.duration>b&&(c.duration=d.duration);c.children.push(d)});c.seek(0);c.reset();c.autoplay&&c.restart();return c};return c};q.random=function(a,c){return Math.floor(Math.random()*(c-a+1))+a};return q});
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(25)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(23)))
 
 /***/ }),
-/* 6 */
+/* 5 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__js_toast__ = __webpack_require__(3);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__toast_vue__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__js_toast__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__toast_vue__ = __webpack_require__(3);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__toast_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__toast_vue__);
 
 
@@ -678,162 +467,119 @@ if (typeof window !== 'undefined' && window.Vue) {
 /* harmony default export */ __webpack_exports__["default"] = (Toasted);
 
 /***/ }),
+/* 6 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_animejs__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_animejs___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_animejs__);
+
+
+var duration = 300;
+
+/* harmony default export */ __webpack_exports__["a"] = ({
+	animateIn: function animateIn(el) {
+		__WEBPACK_IMPORTED_MODULE_0_animejs___default()({
+			targets: el,
+			translateY: '-35px',
+			opacity: 1,
+			duration: duration,
+			easing: 'easeOutCubic'
+		});
+	},
+	animateOut: function animateOut(el, onComplete) {
+		__WEBPACK_IMPORTED_MODULE_0_animejs___default()({
+			targets: el,
+			opacity: 0,
+			marginTop: '-40px',
+			duration: duration,
+			easing: 'easeOutExpo',
+			complete: onComplete
+		});
+	},
+	animateOutBottom: function animateOutBottom(el, onComplete) {
+		__WEBPACK_IMPORTED_MODULE_0_animejs___default()({
+			targets: el,
+			opacity: 0,
+			marginBottom: '-40px',
+			duration: duration,
+			easing: 'easeOutExpo',
+			complete: onComplete
+		});
+	},
+	animateReset: function animateReset(el) {
+		__WEBPACK_IMPORTED_MODULE_0_animejs___default()({
+			targets: el,
+			left: 0,
+			opacity: 1,
+			duration: duration,
+			easing: 'easeOutExpo'
+		});
+	},
+	animatePanning: function animatePanning(el, left, opacity) {
+		__WEBPACK_IMPORTED_MODULE_0_animejs___default()({
+			targets: el,
+			duration: 10,
+			easing: 'easeOutQuad',
+			left: left,
+			opacity: opacity
+		});
+	},
+	animatePanEnd: function animatePanEnd(el, onComplete) {
+		__WEBPACK_IMPORTED_MODULE_0_animejs___default()({
+			targets: el,
+			opacity: 0,
+			duration: duration,
+			easing: 'easeOutExpo',
+			complete: onComplete
+		});
+	}
+});
+
+/***/ }),
 /* 7 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* unused harmony export goAway */
-/* unused harmony export changeText */
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return toastObject; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__animations_js__ = __webpack_require__(1);
-var _this = this;
-
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
-
-
-
-// fade the toast away
-var _goAway = function _goAway(el, delay, instance) {
-
-    // Animate toast out
-    setTimeout(function () {
-
-        // if the toast is on bottom set it as bottom animation
-        if (instance.cached_options.position && instance.cached_options.position.includes('bottom')) {
-            __WEBPACK_IMPORTED_MODULE_0__animations_js__["a" /* default */].animateOutBottom(el, function () {
-                instance.remove(el);
-            });
-            return;
-        }
-
-        __WEBPACK_IMPORTED_MODULE_0__animations_js__["a" /* default */].animateOut(el, function () {
-            instance.remove(el);
-        });
-    }, delay);
-
-    return true;
-};
-
-// change the text of toast
-
-var changeText = function changeText(el, text) {
-    if ((typeof HTMLElement === 'undefined' ? 'undefined' : _typeof(HTMLElement)) === "object" ? text instanceof HTMLElement : text && (typeof text === 'undefined' ? 'undefined' : _typeof(text)) === "object" && text !== null && text.nodeType === 1 && typeof text.nodeName === "string") {
-        el.appendChild(text);
-    } else {
-        el.innerHTML = text;
-    }
-
-    return _this;
-};
-
-var toastObject = function toastObject(el, instance) {
-    var _disposed = false;
-
-    return {
-        el: el,
-        text: function text(_text) {
-            changeText(el, _text);
-            return this;
-        },
-        goAway: function goAway() {
-            var delay = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 800;
-
-            _disposed = true;
-            return _goAway(el, delay, instance);
-        },
-        remove: function remove() {
-            instance.remove(el);
-        },
-        disposed: function disposed() {
-            return _disposed;
-        }
-    };
-};
-
-/***/ }),
-/* 8 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_hammerjs__ = __webpack_require__(12);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_hammerjs__ = __webpack_require__(10);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_hammerjs___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_hammerjs__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__animations__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__object__ = __webpack_require__(7);
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__animations__ = __webpack_require__(6);
 
 
+var uuid = __webpack_require__(1);
 
-
-var uuid = __webpack_require__(2);
-
-// string includes polyfill
-if (!String.prototype.includes) {
-	Object.defineProperty(String.prototype, 'includes', {
-		value: function value(search, start) {
-			if (typeof start !== 'number') {
-				start = 0;
-			}
-
-			if (start + search.length > this.length) {
-				return false;
-			} else {
-				return this.indexOf(search, start) !== -1;
-			}
-		}
-	});
-}
-
-var _options = {};
 var _instance = null;
 /**
  * parse Options
  *
  * @param options
- * @returns {{el: *, text: text, goAway: goAway}}
+ * @returns {{el: *, goAway: goAway}}
  */
 var parseOptions = function parseOptions(options) {
 
 	// class name to be added on the toast
 	options.className = options.className || null;
 
-	// complete call back of the toast
-	options.onComplete = options.onComplete || null;
-
 	// toast position
 	options.position = options.position || "top-right";
 
 	// toast duration
-	options.duration = options.duration || null;
-
-	// keep toast open on mouse over
-	options.keepOnHover = options.keepOnHover || false;
+	options.duration = options.duration || 3000;
 
 	// normal type will allow the basic color
-	options.theme = options.theme || "toasted-primary";
+	options.dark = options.dark || false;
 
 	// normal type will allow the basic color
-	options.type = options.type || "default";
+	options.color = options.color || null;
 
 	// class name to be added on the toast container
 	options.containerClass = options.containerClass || null;
 
-	// check if the fullWidth is enabled
-	options.fullWidth = options.fullWidth || false;
-
 	// get icon name
 	options.icon = options.icon || null;
 
-	// get action name
-	options.action = options.action || null;
-
-	// check if the toast needs to be fitted in the screen (no margin gap between screen)
-	options.fitToScreen = options.fitToScreen || null;
-
 	// check if closes the toast when the user swipes it
 	options.closeOnSwipe = typeof options.closeOnSwipe !== 'undefined' ? options.closeOnSwipe : true;
-
-	// get the icon pack name. defaults to material
-	options.iconPack = options.iconPack || 'material';
 
 	/* transform options */
 
@@ -846,8 +592,11 @@ var parseOptions = function parseOptions(options) {
 		options.className = [];
 	}
 
-	options.theme && options.className.push(options.theme.trim());
-	options.type && options.className.push(options.type);
+	if (options.dark) options.className.push("dark");else options.className.push("light");
+
+	options.color && options.color.split(' ').forEach(function (color) {
+		options.className.push(color);
+	});
 
 	// toast container class
 	if (options.containerClass && typeof options.containerClass === "string") {
@@ -859,18 +608,20 @@ var parseOptions = function parseOptions(options) {
 	}
 
 	options.position && options.containerClass.push(options.position.trim());
-	options.fullWidth && options.containerClass.push('full-width');
-	options.fitToScreen && options.containerClass.push('fit-to-screen');
 
-	_options = options;
 	return options;
 };
 
-var createToast = function createToast(html, options) {
+var createToast = function createToast(message, options) {
 
 	// Create toast
 	var toast = document.createElement('div');
 	toast.classList.add('toasted');
+	var mes = document.createElement('div');
+	mes.classList.add('message');
+
+	mes.innerHTML = message;
+	toast.appendChild(mes);
 
 	// set unique identifier
 	toast.hash = uuid.generate();
@@ -879,14 +630,6 @@ var createToast = function createToast(html, options) {
 		options.className.forEach(function (className) {
 			toast.classList.add(className);
 		});
-	}
-
-	// If type of parameter is HTML Element
-	if ((typeof HTMLElement === 'undefined' ? 'undefined' : _typeof(HTMLElement)) === "object" ? html instanceof HTMLElement : html && (typeof html === 'undefined' ? 'undefined' : _typeof(html)) === "object" && html !== null && html.nodeType === 1 && typeof html.nodeName === "string") {
-		toast.appendChild(html);
-	} else {
-		// Insert as text;
-		toast.innerHTML = html;
 	}
 
 	// add material icon if available
@@ -934,17 +677,6 @@ var createToast = function createToast(html, options) {
 		});
 	}
 
-	// create and append actions
-	if (Array.isArray(options.action)) {
-		options.action.forEach(function (action) {
-			var el = createAction(action, __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2__object__["a" /* toastObject */])(toast, _instance));
-			if (el) toast.appendChild(el);
-		});
-	} else if (_typeof(options.action) === 'object') {
-		var action = createAction(options.action, __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2__object__["a" /* toastObject */])(toast, _instance));
-		if (action) toast.appendChild(action);
-	}
-
 	return toast;
 };
 
@@ -955,209 +687,40 @@ var createIcon = function createIcon(options, toast) {
 
 		var iel = document.createElement('i');
 		iel.setAttribute('aria-hidden', 'true');
+		var iname = options.icon.name ? options.icon.name : options.icon;
 
-		switch (options.iconPack) {
-			case 'fontawesome':
-
-				iel.classList.add('fa');
-
-				var faName = options.icon.name ? options.icon.name : options.icon;
-
-				if (faName.includes('fa-')) {
-					iel.classList.add(faName.trim());
-				} else {
-					iel.classList.add('fa-' + faName.trim());
-				}
-
-				break;
-			case 'mdi':
-
-				iel.classList.add('mdi');
-
-				var mdiName = options.icon.name ? options.icon.name : options.icon;
-
-				if (mdiName.includes('mdi-')) {
-					iel.classList.add(mdiName.trim());
-				} else {
-					iel.classList.add('mdi-' + mdiName.trim());
-				}
-
-				break;
-			case 'custom-class':
-
-				var classes = options.icon.name ? options.icon.name : options.icon;
-
-				if (typeof classes === 'string') {
-					classes.split(' ').forEach(function (className) {
-						iel.classList.add(className);
-					});
-				} else if (Array.isArray(classes)) {
-					classes.forEach(function (className) {
-						iel.classList.add(className.trim());
-					});
-				}
-
-				break;
-			case 'callback':
-				var callback = options.icon && options.icon instanceof Function ? options.icon : null;
-
-				if (callback) {
-					iel = callback(iel);
-				}
-
-				break;
-			default:
-				iel.classList.add('material-icons');
-				iel.textContent = options.icon.name ? options.icon.name : options.icon;
-		}
-
-		if (options.icon.after) {
-			iel.classList.add('after');
-		}
-
-		appendIcon(options, iel, toast);
-	}
-};
-
-var appendIcon = function appendIcon(options, el, toast) {
-
-	if (options.icon) {
-
-		if (options.icon.after && options.icon.name) {
-			toast.appendChild(el);
-		} else if (options.icon.name) {
-			toast.insertBefore(el, toast.firstChild);
+		// fontawesome and material icon are only useable
+		if (iname.includes('fas')) {
+			iname.split(' ').forEach(function (iconClass) {
+				iel.classList.add(iconClass);
+			});
 		} else {
-			toast.insertBefore(el, toast.firstChild);
+			iel.classList.add('material-icons');
+			iel.textContent = options.icon.name ? options.icon.name : options.icon;
 		}
+
+		toast.insertBefore(iel, toast.firstChild);
 	}
 };
 
-/**
- * Create Action for the toast
- *
- * @param action
- * @param toastObject
- * @returns {Element}
- */
-var createAction = function createAction(action, toastObject) {
+var toastObject = function toastObject(el, instance) {
+	return {
+		el: el,
+		goAway: function goAway() {
+			var delay = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 800;
 
-	if (!action) {
-		return null;
-	}
-
-	var el = document.createElement('a');
-	el.classList.add('action');
-	el.classList.add('ripple');
-
-	if (action.text) {
-		el.text = action.text;
-	}
-
-	if (action.href) {
-		el.href = action.href;
-	}
-
-	if (action.target) {
-		el.target = action.target;
-	}
-
-	if (action.icon) {
-
-		// add icon class to style it
-		el.classList.add('icon');
-
-		// create icon element
-		var iel = document.createElement('i');
-
-		switch (_options.iconPack) {
-			case 'fontawesome':
-				iel.classList.add('fa');
-
-				if (action.icon.includes('fa-')) {
-					iel.classList.add(action.icon.trim());
-				} else {
-					iel.classList.add('fa-' + action.icon.trim());
-				}
-
-				break;
-			case 'mdi':
-				iel.classList.add('mdi');
-
-				if (action.icon.includes('mdi-')) {
-					iel.classList.add(action.icon.trim());
-				} else {
-					iel.classList.add('mdi-' + action.icon.trim());
-				}
-
-				break;
-			case 'custom-class':
-
-				if (typeof action.icon === 'string') {
-					action.icon.split(' ').forEach(function (className) {
-						el.classList.add(className);
-					});
-				} else if (Array.isArray(action.icon)) {
-					action.icon.forEach(function (className) {
-						el.classList.add(className.trim());
-					});
-				}
-
-				break;
-			default:
-				iel.classList.add('material-icons');
-				iel.textContent = action.icon;
+			// Animate toast out
+			setTimeout(function () {
+				__WEBPACK_IMPORTED_MODULE_1__animations__["a" /* default */].animateOut(el, function () {
+					instance.remove(el);
+				});
+			}, delay);
+			return true;
+		},
+		remove: function remove() {
+			instance.remove(el);
 		}
-
-		// append it to the button
-		el.appendChild(iel);
-	}
-
-	if (action.class) {
-
-		if (typeof action.class === 'string') {
-			action.class.split(' ').forEach(function (className) {
-				el.classList.add(className);
-			});
-		} else if (Array.isArray(action.class)) {
-			action.class.forEach(function (className) {
-				el.classList.add(className.trim());
-			});
-		}
-	}
-
-	// initiate push with ready
-	if (action.push) {
-
-		el.addEventListener('click', function (e) {
-			e.preventDefault();
-
-			// check if vue router passed through global options
-			if (!_options.router) {
-				console.warn('[vue-toasted] : Vue Router instance is not attached. please check the docs');
-				return;
-			}
-
-			_options.router.push(action.push);
-
-			// fade away toast after action.
-			if (!action.push.dontClose) {
-				toastObject.goAway(0);
-			}
-		});
-	}
-
-	if (action.onClick && typeof action.onClick === 'function') {
-		el.addEventListener('click', function (e) {
-
-			if (action.onClick) {
-				e.preventDefault();
-				action.onClick(e, toastObject);
-			}
-		});
-	}
-
-	return el;
+	};
 };
 
 /**
@@ -1166,7 +729,7 @@ var createAction = function createAction(action, toastObject) {
  * @param instance
  * @param message
  * @param options
- * @returns {{el: *, text: text, goAway: goAway}}
+ * @returns {{el: *, goAway: goAway}}
  */
 /* harmony default export */ __webpack_exports__["a"] = (function (instance, message, options) {
 
@@ -1190,9 +753,7 @@ var createAction = function createAction(action, toastObject) {
 	var newToast = createToast(message, options);
 
 	// only append toast if message is not undefined
-	if (message) {
-		container.appendChild(newToast);
-	}
+	container.appendChild(newToast);
 
 	newToast.style.opacity = 0;
 
@@ -1202,66 +763,50 @@ var createAction = function createAction(action, toastObject) {
 	// Allows timer to be pause while being panned
 	var timeLeft = options.duration;
 	var counterInterval = void 0;
-	if (timeLeft !== null) {
 
-		var createInterval = function createInterval() {
-			return setInterval(function () {
-				if (newToast.parentNode === null) window.clearInterval(counterInterval);
+	var createInterval = function createInterval() {
+		return setInterval(function () {
+			if (newToast.parentNode === null) window.clearInterval(counterInterval);
 
-				// If toast is not being dragged, decrease its time remaining
-				if (!newToast.classList.contains('panning')) {
-					timeLeft -= 20;
-				}
+			// If toast is not being dragged, decrease its time remaining
+			if (!newToast.classList.contains('panning')) {
+				timeLeft -= 20;
+			}
 
-				if (timeLeft <= 0) {
-					// Animate toast out
-
-					__WEBPACK_IMPORTED_MODULE_1__animations__["a" /* default */].animateOut(newToast, function () {
-						// Call the optional callback
-						if (typeof options.onComplete === "function") options.onComplete();
-						// Remove toast after it times out
-						if (newToast.parentNode) {
-							_instance.remove(newToast);
-						}
-					});
-
-					window.clearInterval(counterInterval);
-				}
-			}, 20);
-		};
-
-		counterInterval = createInterval();
-
-		// Toggle interval on hover
-		if (options.keepOnHover) {
-			newToast.addEventListener('mouseover', function () {
+			if (timeLeft <= 0) {
+				// Animate toast out
+				__WEBPACK_IMPORTED_MODULE_1__animations__["a" /* default */].animateOut(newToast, function () {
+					// Remove toast after it times out
+					if (newToast.parentNode) {
+						_instance.remove(newToast);
+					}
+				});
 				window.clearInterval(counterInterval);
-			});
-			newToast.addEventListener('mouseout', function () {
-				counterInterval = createInterval();
-			});
-		}
-	}
+			}
+		}, 20);
+	};
 
-	return __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2__object__["a" /* toastObject */])(newToast, _instance);
-});;
+	counterInterval = createInterval();
+
+	return toastObject(newToast, _instance);
+});
 
 /***/ }),
-/* 9 */
+/* 8 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(10)();
+exports = module.exports = __webpack_require__(9)();
 // imports
 
 
 // module
-exports.push([module.i, ".toasted{padding:0 20px}.toasted.rounded{border-radius:24px}.toasted .primary,.toasted.toasted-primary{border-radius:2px;min-height:38px;line-height:1.1em;background-color:#353535;padding:6px 20px;font-size:15px;font-weight:300;color:#fff;box-shadow:0 1px 3px rgba(0,0,0,.12),0 1px 2px rgba(0,0,0,.24)}.toasted .primary.success,.toasted.toasted-primary.success{background:#4caf50}.toasted .primary.error,.toasted.toasted-primary.error{background:#f44336}.toasted .primary.info,.toasted.toasted-primary.info{background:#3f51b5}.toasted .primary .action,.toasted.toasted-primary .action{color:#a1c2fa}.toasted.bubble{border-radius:30px;min-height:38px;line-height:1.1em;background-color:#ff7043;padding:0 20px;font-size:15px;font-weight:300;color:#fff;box-shadow:0 1px 3px rgba(0,0,0,.12),0 1px 2px rgba(0,0,0,.24)}.toasted.bubble.success{background:#4caf50}.toasted.bubble.error{background:#f44336}.toasted.bubble.info{background:#3f51b5}.toasted.bubble .action{color:#8e2b0c}.toasted.outline{border-radius:30px;min-height:38px;line-height:1.1em;background-color:#fff;border:1px solid #676767;padding:0 20px;font-size:15px;color:#676767;box-shadow:0 1px 3px rgba(0,0,0,.12),0 1px 2px rgba(0,0,0,.24);font-weight:700}.toasted.outline.success{color:#4caf50;border-color:#4caf50}.toasted.outline.error{color:#f44336;border-color:#f44336}.toasted.outline.info{color:#3f51b5;border-color:#3f51b5}.toasted.outline .action{color:#607d8b}.toasted-container{position:fixed;z-index:10000}.toasted-container,.toasted-container.full-width{display:-ms-flexbox;display:flex;-ms-flex-direction:column;flex-direction:column}.toasted-container.full-width{max-width:86%;width:100%}.toasted-container.full-width.fit-to-screen{min-width:100%}.toasted-container.full-width.fit-to-screen .toasted:first-child{margin-top:0}.toasted-container.full-width.fit-to-screen.top-right{top:0;right:0}.toasted-container.full-width.fit-to-screen.top-left{top:0;left:0}.toasted-container.full-width.fit-to-screen.top-center{top:0;left:0;-webkit-transform:translateX(0);transform:translateX(0)}.toasted-container.full-width.fit-to-screen.bottom-right{right:0;bottom:0}.toasted-container.full-width.fit-to-screen.bottom-left{left:0;bottom:0}.toasted-container.full-width.fit-to-screen.bottom-center{left:0;bottom:0;-webkit-transform:translateX(0);transform:translateX(0)}.toasted-container.top-right{top:10%;right:7%}.toasted-container.top-left{top:10%;left:7%}.toasted-container.top-center{top:10%;left:50%;-webkit-transform:translateX(-50%);transform:translateX(-50%)}.toasted-container.bottom-right{right:5%;bottom:7%}.toasted-container.bottom-left{left:5%;bottom:7%}.toasted-container.bottom-center{left:50%;-webkit-transform:translateX(-50%);transform:translateX(-50%);bottom:7%}.toasted-container.bottom-left .toasted,.toasted-container.top-left .toasted{float:left}.toasted-container.bottom-right .toasted,.toasted-container.top-right .toasted{float:right}.toasted-container .toasted{top:35px;width:auto;clear:both;margin-top:10px;position:relative;max-width:100%;height:auto;word-break:normal;display:-ms-flexbox;display:flex;-ms-flex-align:center;align-items:center;-ms-flex-pack:justify;justify-content:space-between;box-sizing:inherit}.toasted-container .toasted .fa,.toasted-container .toasted .fab,.toasted-container .toasted .far,.toasted-container .toasted .fas,.toasted-container .toasted .material-icons,.toasted-container .toasted .mdi{margin-right:.5rem;margin-left:-.4rem}.toasted-container .toasted .fa.after,.toasted-container .toasted .fab.after,.toasted-container .toasted .far.after,.toasted-container .toasted .fas.after,.toasted-container .toasted .material-icons.after,.toasted-container .toasted .mdi.after{margin-left:.5rem;margin-right:-.4rem}.toasted-container .toasted .action{text-decoration:none;font-size:.8rem;padding:8px;margin:5px -7px 5px 7px;border-radius:3px;text-transform:uppercase;letter-spacing:.03em;font-weight:600;cursor:pointer}.toasted-container .toasted .action.icon{padding:4px;display:-ms-flexbox;display:flex;-ms-flex-align:center;align-items:center;-ms-flex-pack:center;justify-content:center}.toasted-container .toasted .action.icon .fa,.toasted-container .toasted .action.icon .material-icons,.toasted-container .toasted .action.icon .mdi{margin-right:0;margin-left:4px}.toasted-container .toasted .action.icon:hover{text-decoration:none}.toasted-container .toasted .action:hover{text-decoration:underline}@media only screen and (max-width:600px){.toasted-container{min-width:100%}.toasted-container .toasted:first-child{margin-top:0}.toasted-container.top-right{top:0;right:0}.toasted-container.top-left{top:0;left:0}.toasted-container.top-center{top:0;left:0;-webkit-transform:translateX(0);transform:translateX(0)}.toasted-container.bottom-right{right:0;bottom:0}.toasted-container.bottom-left{left:0;bottom:0}.toasted-container.bottom-center{left:0;bottom:0;-webkit-transform:translateX(0);transform:translateX(0)}.toasted-container.bottom-center,.toasted-container.top-center{-ms-flex-align:stretch!important;align-items:stretch!important}.toasted-container.bottom-left .toasted,.toasted-container.bottom-right .toasted,.toasted-container.top-left .toasted,.toasted-container.top-right .toasted{float:none}.toasted-container .toasted{border-radius:0}}", ""]);
+exports.push([module.i, ".toasted-container{display:block;position:fixed;z-index:1000}.toasted-container.top-right{top:10%;right:3%}.toasted-container.top-left{top:10%;left:3%}.toasted-container.top-center{top:10%;left:50%;-webkit-transform:translateX(-50%);transform:translateX(-50%)}.toasted-container.bottom-right{right:3%;bottom:7%}.toasted-container.bottom-left{left:3%;bottom:7%}.toasted-container.bottom-center{left:50%;-webkit-transform:translateX(-50%);transform:translateX(-50%);bottom:7%}.toasted-container.bottom-left .toasted,.toasted-container.top-left .toasted{float:left}.toasted-container.bottom-right .toasted,.toasted-container.top-right .toasted{float:right}.toasted-container .toasted{top:35px;clear:both;margin-top:10px;position:relative;max-width:300px;height:auto;word-break:break-all;display:-ms-flexbox;display:flex;-ms-flex-align:center;align-items:center;-ms-flex-pack:justify;justify-content:space-between;padding:0 20px;border-radius:4px;min-height:38px;line-height:1.1em;background:transparent;padding:6px 20px;font-size:15px;font-weight:300;box-shadow:0 1px 3px rgba(0,0,0,.12),0 1px 2px rgba(0,0,0,.24)}.toasted-container .toasted.dark{color:#fff}.toasted-container .toasted.light{color:#000}.toasted-container .toasted.red{background:#f44336}.toasted-container .toasted.red.lighten-5{background:#ffebee}.toasted-container .toasted.red.lighten-4{background:#ffcdd2}.toasted-container .toasted.red.lighten-3{background:#ef9a9a}.toasted-container .toasted.red.lighten-2{background:#e57373}.toasted-container .toasted.red.lighten-1{background:#ef5350}.toasted-container .toasted.red.darken-1{background:#e53935}.toasted-container .toasted.red.darken-2{background:#d32f2f}.toasted-container .toasted.red.darken-3{background:#c62828}.toasted-container .toasted.red.darken-4{background:#b71c1c}.toasted-container .toasted.red.accent-1{background:#ff8a80}.toasted-container .toasted.red.accent-2{background:#ff5252}.toasted-container .toasted.red.accent-3{background:#ff1744}.toasted-container .toasted.red.accent-4{background:#d50000}.toasted-container .toasted.pink{background:#e91e63}.toasted-container .toasted.pink.lighten-5{background:#fce4ec}.toasted-container .toasted.pink.lighten-4{background:#f8bbd0}.toasted-container .toasted.pink.lighten-3{background:#f48fb1}.toasted-container .toasted.pink.lighten-2{background:#f06292}.toasted-container .toasted.pink.lighten-1{background:#ec407a}.toasted-container .toasted.pink.darken-1{background:#d81b60}.toasted-container .toasted.pink.darken-2{background:#c2185b}.toasted-container .toasted.pink.darken-3{background:#ad1457}.toasted-container .toasted.pink.darken-4{background:#880e4f}.toasted-container .toasted.pink.accent-1{background:#ff80ab}.toasted-container .toasted.pink.accent-2{background:#ff4081}.toasted-container .toasted.pink.accent-3{background:#f50057}.toasted-container .toasted.pink.accent-4{background:#c51162}.toasted-container .toasted.purple{background:#9c27b0}.toasted-container .toasted.purple.lighten-5{background:#f3e5f5}.toasted-container .toasted.purple.lighten-4{background:#e1bee7}.toasted-container .toasted.purple.lighten-3{background:#ce93d8}.toasted-container .toasted.purple.lighten-2{background:#ba68c8}.toasted-container .toasted.purple.lighten-1{background:#ab47bc}.toasted-container .toasted.purple.darken-1{background:#8e24aa}.toasted-container .toasted.purple.darken-2{background:#7b1fa2}.toasted-container .toasted.purple.darken-3{background:#6a1b9a}.toasted-container .toasted.purple.darken-4{background:#4a148c}.toasted-container .toasted.purple.accent-1{background:#ea80fc}.toasted-container .toasted.purple.accent-2{background:#e040fb}.toasted-container .toasted.purple.accent-3{background:#d500f9}.toasted-container .toasted.purple.accent-4{background:#a0f}.toasted-container .toasted.deep-purple{background:#673ab7}.toasted-container .toasted.deep-purple.lighten-5{background:#ede7f6}.toasted-container .toasted.deep-purple.lighten-4{background:#d1c4e9}.toasted-container .toasted.deep-purple.lighten-3{background:#b39ddb}.toasted-container .toasted.deep-purple.lighten-2{background:#9575cd}.toasted-container .toasted.deep-purple.lighten-1{background:#7e57c2}.toasted-container .toasted.deep-purple.darken-1{background:#5e35b1}.toasted-container .toasted.deep-purple.darken-2{background:#512da8}.toasted-container .toasted.deep-purple.darken-3{background:#4527a0}.toasted-container .toasted.deep-purple.darken-4{background:#311b92}.toasted-container .toasted.deep-purple.accent-1{background:#b388ff}.toasted-container .toasted.deep-purple.accent-2{background:#7c4dff}.toasted-container .toasted.deep-purple.accent-3{background:#651fff}.toasted-container .toasted.deep-purple.accent-4{background:#6200ea}.toasted-container .toasted.indigo{background:#3f51b5}.toasted-container .toasted.indigo.lighten-5{background:#e8eaf6}.toasted-container .toasted.indigo.lighten-4{background:#c5cae9}.toasted-container .toasted.indigo.lighten-3{background:#9fa8da}.toasted-container .toasted.indigo.lighten-2{background:#7986cb}.toasted-container .toasted.indigo.lighten-1{background:#5c6bc0}.toasted-container .toasted.indigo.darken-1{background:#3949ab}.toasted-container .toasted.indigo.darken-2{background:#303f9f}.toasted-container .toasted.indigo.darken-3{background:#283593}.toasted-container .toasted.indigo.darken-4{background:#1a237e}.toasted-container .toasted.indigo.accent-1{background:#8c9eff}.toasted-container .toasted.indigo.accent-2{background:#536dfe}.toasted-container .toasted.indigo.accent-3{background:#3d5afe}.toasted-container .toasted.indigo.accent-4{background:#304ffe}.toasted-container .toasted.blue{background:#2196f3}.toasted-container .toasted.blue.lighten-5{background:#e3f2fd}.toasted-container .toasted.blue.lighten-4{background:#bbdefb}.toasted-container .toasted.blue.lighten-3{background:#90caf9}.toasted-container .toasted.blue.lighten-2{background:#64b5f6}.toasted-container .toasted.blue.lighten-1{background:#42a5f5}.toasted-container .toasted.blue.darken-1{background:#1e88e5}.toasted-container .toasted.blue.darken-2{background:#1976d2}.toasted-container .toasted.blue.darken-3{background:#1565c0}.toasted-container .toasted.blue.darken-4{background:#0d47a1}.toasted-container .toasted.blue.accent-1{background:#82b1ff}.toasted-container .toasted.blue.accent-2{background:#448aff}.toasted-container .toasted.blue.accent-3{background:#2979ff}.toasted-container .toasted.blue.accent-4{background:#2962ff}.toasted-container .toasted.light-blue{background:#03a9f4}.toasted-container .toasted.light-blue.lighten-5{background:#e1f5fe}.toasted-container .toasted.light-blue.lighten-4{background:#b3e5fc}.toasted-container .toasted.light-blue.lighten-3{background:#81d4fa}.toasted-container .toasted.light-blue.lighten-2{background:#4fc3f7}.toasted-container .toasted.light-blue.lighten-1{background:#29b6f6}.toasted-container .toasted.light-blue.darken-1{background:#039be5}.toasted-container .toasted.light-blue.darken-2{background:#0288d1}.toasted-container .toasted.light-blue.darken-3{background:#0277bd}.toasted-container .toasted.light-blue.darken-4{background:#01579b}.toasted-container .toasted.light-blue.accent-1{background:#80d8ff}.toasted-container .toasted.light-blue.accent-2{background:#40c4ff}.toasted-container .toasted.light-blue.accent-3{background:#00b0ff}.toasted-container .toasted.light-blue.accent-4{background:#0091ea}.toasted-container .toasted.cyan{background:#00bcd4}.toasted-container .toasted.cyan.lighten-5{background:#e0f7fa}.toasted-container .toasted.cyan.lighten-4{background:#b2ebf2}.toasted-container .toasted.cyan.lighten-3{background:#80deea}.toasted-container .toasted.cyan.lighten-2{background:#4dd0e1}.toasted-container .toasted.cyan.lighten-1{background:#26c6da}.toasted-container .toasted.cyan.darken-1{background:#00acc1}.toasted-container .toasted.cyan.darken-2{background:#0097a7}.toasted-container .toasted.cyan.darken-3{background:#00838f}.toasted-container .toasted.cyan.darken-4{background:#006064}.toasted-container .toasted.cyan.accent-1{background:#84ffff}.toasted-container .toasted.cyan.accent-2{background:#18ffff}.toasted-container .toasted.cyan.accent-3{background:#00e5ff}.toasted-container .toasted.cyan.accent-4{background:#00b8d4}.toasted-container .toasted.teal{background:#009688}.toasted-container .toasted.teal.lighten-5{background:#e0f2f1}.toasted-container .toasted.teal.lighten-4{background:#b2dfdb}.toasted-container .toasted.teal.lighten-3{background:#80cbc4}.toasted-container .toasted.teal.lighten-2{background:#4db6ac}.toasted-container .toasted.teal.lighten-1{background:#26a69a}.toasted-container .toasted.teal.darken-1{background:#00897b}.toasted-container .toasted.teal.darken-2{background:#00796b}.toasted-container .toasted.teal.darken-3{background:#00695c}.toasted-container .toasted.teal.darken-4{background:#004d40}.toasted-container .toasted.teal.accent-1{background:#a7ffeb}.toasted-container .toasted.teal.accent-2{background:#64ffda}.toasted-container .toasted.teal.accent-3{background:#1de9b6}.toasted-container .toasted.teal.accent-4{background:#00bfa5}.toasted-container .toasted.green{background:#4caf50}.toasted-container .toasted.green.lighten-5{background:#e8f5e9}.toasted-container .toasted.green.lighten-4{background:#c8e6c9}.toasted-container .toasted.green.lighten-3{background:#a5d6a7}.toasted-container .toasted.green.lighten-2{background:#81c784}.toasted-container .toasted.green.lighten-1{background:#66bb6a}.toasted-container .toasted.green.darken-1{background:#43a047}.toasted-container .toasted.green.darken-2{background:#388e3c}.toasted-container .toasted.green.darken-3{background:#2e7d32}.toasted-container .toasted.green.darken-4{background:#1b5e20}.toasted-container .toasted.green.accent-1{background:#b9f6ca}.toasted-container .toasted.green.accent-2{background:#69f0ae}.toasted-container .toasted.green.accent-3{background:#00e676}.toasted-container .toasted.green.accent-4{background:#00c853}.toasted-container .toasted.light-green{background:#8bc34a}.toasted-container .toasted.light-green.lighten-5{background:#f1f8e9}.toasted-container .toasted.light-green.lighten-4{background:#dcedc8}.toasted-container .toasted.light-green.lighten-3{background:#c5e1a5}.toasted-container .toasted.light-green.lighten-2{background:#aed581}.toasted-container .toasted.light-green.lighten-1{background:#9ccc65}.toasted-container .toasted.light-green.darken-1{background:#7cb342}.toasted-container .toasted.light-green.darken-2{background:#689f38}.toasted-container .toasted.light-green.darken-3{background:#558b2f}.toasted-container .toasted.light-green.darken-4{background:#33691e}.toasted-container .toasted.light-green.accent-1{background:#ccff90}.toasted-container .toasted.light-green.accent-2{background:#b2ff59}.toasted-container .toasted.light-green.accent-3{background:#76ff03}.toasted-container .toasted.light-green.accent-4{background:#64dd17}.toasted-container .toasted.lime{background:#cddc39}.toasted-container .toasted.lime.lighten-5{background:#f9fbe7}.toasted-container .toasted.lime.lighten-4{background:#f0f4c3}.toasted-container .toasted.lime.lighten-3{background:#e6ee9c}.toasted-container .toasted.lime.lighten-2{background:#dce775}.toasted-container .toasted.lime.lighten-1{background:#d4e157}.toasted-container .toasted.lime.darken-1{background:#c0ca33}.toasted-container .toasted.lime.darken-2{background:#afb42b}.toasted-container .toasted.lime.darken-3{background:#9e9d24}.toasted-container .toasted.lime.darken-4{background:#827717}.toasted-container .toasted.lime.accent-1{background:#f4ff81}.toasted-container .toasted.lime.accent-2{background:#eeff41}.toasted-container .toasted.lime.accent-3{background:#c6ff00}.toasted-container .toasted.lime.accent-4{background:#aeea00}.toasted-container .toasted.yellow{background:#ffeb3b}.toasted-container .toasted.yellow.lighten-5{background:#fffde7}.toasted-container .toasted.yellow.lighten-4{background:#fff9c4}.toasted-container .toasted.yellow.lighten-3{background:#fff59d}.toasted-container .toasted.yellow.lighten-2{background:#fff176}.toasted-container .toasted.yellow.lighten-1{background:#ffee58}.toasted-container .toasted.yellow.darken-1{background:#fdd835}.toasted-container .toasted.yellow.darken-2{background:#fbc02d}.toasted-container .toasted.yellow.darken-3{background:#f9a825}.toasted-container .toasted.yellow.darken-4{background:#f57f17}.toasted-container .toasted.yellow.accent-1{background:#ffff8d}.toasted-container .toasted.yellow.accent-2{background:#ff0}.toasted-container .toasted.yellow.accent-3{background:#ffea00}.toasted-container .toasted.yellow.accent-4{background:#ffd600}.toasted-container .toasted.amber{background:#ffc107}.toasted-container .toasted.amber.lighten-5{background:#fff8e1}.toasted-container .toasted.amber.lighten-4{background:#ffecb3}.toasted-container .toasted.amber.lighten-3{background:#ffe082}.toasted-container .toasted.amber.lighten-2{background:#ffd54f}.toasted-container .toasted.amber.lighten-1{background:#ffca28}.toasted-container .toasted.amber.darken-1{background:#ffb300}.toasted-container .toasted.amber.darken-2{background:#ffa000}.toasted-container .toasted.amber.darken-3{background:#ff8f00}.toasted-container .toasted.amber.darken-4{background:#ff6f00}.toasted-container .toasted.amber.accent-1{background:#ffe57f}.toasted-container .toasted.amber.accent-2{background:#ffd740}.toasted-container .toasted.amber.accent-3{background:#ffc400}.toasted-container .toasted.amber.accent-4{background:#ffab00}.toasted-container .toasted.orange{background:#ff9800}.toasted-container .toasted.orange.lighten-5{background:#fff3e0}.toasted-container .toasted.orange.lighten-4{background:#ffe0b2}.toasted-container .toasted.orange.lighten-3{background:#ffcc80}.toasted-container .toasted.orange.lighten-2{background:#ffb74d}.toasted-container .toasted.orange.lighten-1{background:#ffa726}.toasted-container .toasted.orange.darken-1{background:#fb8c00}.toasted-container .toasted.orange.darken-2{background:#f57c00}.toasted-container .toasted.orange.darken-3{background:#ef6c00}.toasted-container .toasted.orange.darken-4{background:#e65100}.toasted-container .toasted.orange.accent-1{background:#ffd180}.toasted-container .toasted.orange.accent-2{background:#ffab40}.toasted-container .toasted.orange.accent-3{background:#ff9100}.toasted-container .toasted.orange.accent-4{background:#ff6d00}.toasted-container .toasted.deep-orange{background:#ff5722}.toasted-container .toasted.deep-orange.lighten-5{background:#fbe9e7}.toasted-container .toasted.deep-orange.lighten-4{background:#ffccbc}.toasted-container .toasted.deep-orange.lighten-3{background:#ffab91}.toasted-container .toasted.deep-orange.lighten-2{background:#ff8a65}.toasted-container .toasted.deep-orange.lighten-1{background:#ff7043}.toasted-container .toasted.deep-orange.darken-1{background:#f4511e}.toasted-container .toasted.deep-orange.darken-2{background:#e64a19}.toasted-container .toasted.deep-orange.darken-3{background:#d84315}.toasted-container .toasted.deep-orange.darken-4{background:#bf360c}.toasted-container .toasted.deep-orange.accent-1{background:#ff9e80}.toasted-container .toasted.deep-orange.accent-2{background:#ff6e40}.toasted-container .toasted.deep-orange.accent-3{background:#ff3d00}.toasted-container .toasted.deep-orange.accent-4{background:#dd2c00}.toasted-container .toasted.brown{background:#795548}.toasted-container .toasted.brown.lighten-5{background:#efebe9}.toasted-container .toasted.brown.lighten-4{background:#d7ccc8}.toasted-container .toasted.brown.lighten-3{background:#bcaaa4}.toasted-container .toasted.brown.lighten-2{background:#a1887f}.toasted-container .toasted.brown.lighten-1{background:#8d6e63}.toasted-container .toasted.brown.darken-1{background:#6d4c41}.toasted-container .toasted.brown.darken-2{background:#5d4037}.toasted-container .toasted.brown.darken-3{background:#4e342e}.toasted-container .toasted.brown.darken-4{background:#3e2723}.toasted-container .toasted.blue-grey{background:#607d8b}.toasted-container .toasted.blue-grey.lighten-5{background:#eceff1}.toasted-container .toasted.blue-grey.lighten-4{background:#cfd8dc}.toasted-container .toasted.blue-grey.lighten-3{background:#b0bec5}.toasted-container .toasted.blue-grey.lighten-2{background:#90a4ae}.toasted-container .toasted.blue-grey.lighten-1{background:#78909c}.toasted-container .toasted.blue-grey.darken-1{background:#546e7a}.toasted-container .toasted.blue-grey.darken-2{background:#455a64}.toasted-container .toasted.blue-grey.darken-3{background:#37474f}.toasted-container .toasted.blue-grey.darken-4{background:#263238}.toasted-container .toasted.grey{background:#9e9e9e}.toasted-container .toasted.grey.lighten-5{background:#fafafa}.toasted-container .toasted.grey.lighten-4{background:#f5f5f5}.toasted-container .toasted.grey.lighten-3{background:#eee}.toasted-container .toasted.grey.lighten-2{background:#e0e0e0}.toasted-container .toasted.grey.lighten-1{background:#bdbdbd}.toasted-container .toasted.grey.darken-1{background:#757575}.toasted-container .toasted.grey.darken-2{background:#616161}.toasted-container .toasted.grey.darken-3{background:#424242}.toasted-container .toasted.grey.darken-4{background:#212121}.toasted-container .toasted.black{background:#000}.toasted-container .toasted.white{background:#fff}.toasted-container .toasted.transparent{background:transparent}.toasted-container .toasted .message{width:100%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.toasted-container .toasted .fab,.toasted-container .toasted .fas,.toasted-container .toasted .material-icons{margin-right:.5rem;margin-left:-.4rem}", ""]);
 
 // exports
 
 
 /***/ }),
-/* 10 */
+/* 9 */
 /***/ (function(module, exports) {
 
 /*
@@ -1317,60 +862,7 @@ module.exports = function() {
 
 
 /***/ }),
-/* 11 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/**
- * Code refactored from Mozilla Developer Network:
- * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/assign
- */
-
-
-
-function assign(target, firstSource) {
-  if (target === undefined || target === null) {
-    throw new TypeError('Cannot convert first argument to object');
-  }
-
-  var to = Object(target);
-  for (var i = 1; i < arguments.length; i++) {
-    var nextSource = arguments[i];
-    if (nextSource === undefined || nextSource === null) {
-      continue;
-    }
-
-    var keysArray = Object.keys(Object(nextSource));
-    for (var nextIndex = 0, len = keysArray.length; nextIndex < len; nextIndex++) {
-      var nextKey = keysArray[nextIndex];
-      var desc = Object.getOwnPropertyDescriptor(nextSource, nextKey);
-      if (desc !== undefined && desc.enumerable) {
-        to[nextKey] = nextSource[nextKey];
-      }
-    }
-  }
-  return to;
-}
-
-function polyfill() {
-  if (!Object.assign) {
-    Object.defineProperty(Object, 'assign', {
-      enumerable: false,
-      configurable: true,
-      writable: true,
-      value: assign
-    });
-  }
-}
-
-module.exports = {
-  assign: assign,
-  polyfill: polyfill
-};
-
-
-/***/ }),
-/* 12 */
+/* 10 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_RESULT__;/*! Hammer.JS - v2.0.7 - 2016-04-22
@@ -4020,7 +3512,7 @@ if (true) {
 
 
 /***/ }),
-/* 13 */
+/* 11 */
 /***/ (function(module, exports) {
 
 /**
@@ -4076,13 +3568,13 @@ module.exports = function (random, alphabet, size) {
 
 
 /***/ }),
-/* 14 */
+/* 12 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var generate = __webpack_require__(15);
+var generate = __webpack_require__(13);
 var alphabet = __webpack_require__(0);
 
 // Ignore all milliseconds before a certain time to reduce the size of the date entropy without sacrificing uniqueness.
@@ -4129,15 +3621,15 @@ module.exports = build;
 
 
 /***/ }),
-/* 15 */
+/* 13 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
 var alphabet = __webpack_require__(0);
-var random = __webpack_require__(18);
-var format = __webpack_require__(13);
+var random = __webpack_require__(16);
+var format = __webpack_require__(11);
 
 function generate(number) {
     var loopCounter = 0;
@@ -4157,21 +3649,21 @@ module.exports = generate;
 
 
 /***/ }),
-/* 16 */
+/* 14 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
 var alphabet = __webpack_require__(0);
-var build = __webpack_require__(14);
-var isValid = __webpack_require__(17);
+var build = __webpack_require__(12);
+var isValid = __webpack_require__(15);
 
 // if you are using cluster or multiple servers use this to make each instance
 // has a unique value for worker
 // Note: I don't know if this is automatically set when using third
 // party cluster solutions such as pm2.
-var clusterWorkerId = __webpack_require__(20) || 0;
+var clusterWorkerId = __webpack_require__(18) || 0;
 
 /**
  * Set the seed.
@@ -4226,7 +3718,7 @@ module.exports.isValid = isValid;
 
 
 /***/ }),
-/* 17 */
+/* 15 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4248,7 +3740,7 @@ module.exports = isShortId;
 
 
 /***/ }),
-/* 18 */
+/* 16 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4276,7 +3768,7 @@ module.exports = randomByte;
 
 
 /***/ }),
-/* 19 */
+/* 17 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4308,7 +3800,7 @@ module.exports = {
 
 
 /***/ }),
-/* 20 */
+/* 18 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4318,7 +3810,7 @@ module.exports = 0;
 
 
 /***/ }),
-/* 21 */
+/* 19 */
 /***/ (function(module, exports) {
 
 // this module is a runtime utility for cleaner component module output and will
@@ -4375,20 +3867,20 @@ module.exports = function normalizeComponent (
 
 
 /***/ }),
-/* 22 */
+/* 20 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(9);
+var content = __webpack_require__(8);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(23)("02af2e15", content, true, {});
+var update = __webpack_require__(21)("257ec9da", content, true, {});
 
 /***/ }),
-/* 23 */
+/* 21 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /*
@@ -4407,7 +3899,7 @@ if (typeof DEBUG !== 'undefined' && DEBUG) {
   ) }
 }
 
-var listToStyles = __webpack_require__(24)
+var listToStyles = __webpack_require__(22)
 
 /*
 type StyleObject = {
@@ -4616,7 +4108,7 @@ function applyToTag (styleElement, obj) {
 
 
 /***/ }),
-/* 24 */
+/* 22 */
 /***/ (function(module, exports) {
 
 /**
@@ -4649,7 +4141,7 @@ module.exports = function listToStyles (parentId, list) {
 
 
 /***/ }),
-/* 25 */
+/* 23 */
 /***/ (function(module, exports) {
 
 var g;
