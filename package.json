@@ -1,6 +1,6 @@
 {
-  "name": "vue-toasted",
-  "description": "Responsive Touch Compatible Toast plugin for VueJS 2+",
+  "name": "@mnsinri/vue-toasted",
+  "description": "[forked] Responsive Touch Compatible Toast plugin for VueJS 2+",
   "version": "1.1.27",
   "author": "Shakeeb Sadikeen <shakee.zats@gmail.com>",
   "license": "MIT",
@@ -18,6 +18,9 @@
     "css": "cross-env NODE_ENV=production webpack --config ./build/webpack.release.css.js --progress --hide-modules ",
     "core": "cross-env NODE_ENV=production webpack --config ./build/webpack.release.core.js --progress --hide-modules",
     "es": "babel src --presets babel-preset-es2015 --out-dir dist"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/"
   },
   "keywords": [
     "toast",
