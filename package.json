@@ -4,10 +4,7 @@
   "version": "1.1.27",
   "author": "Shakeeb Sadikeen <shakee.zats@gmail.com>",
   "license": "MIT",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/shakee93/vue-toasted.git"
-  },
+  "repository": "git://https://github.com/mnsinri/vue-toasted.git",
   "main": "./dist/vue-toasted.min.js",
   "types": "./types/index.d.ts",
   "scripts": {
