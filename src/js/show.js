@@ -148,10 +148,10 @@ const createIcon = (options, toast) => {
 
 		let iel = document.createElement('i')
 		iel.setAttribute('aria-hidden', 'true')
-		let iname = options.icon.name ? options.icon.name : options.icon
+		let iname = options.icon
 
 		// fontawesome and material icon are only useable
-		if(iname.includes('fas')){
+		if(iname.includes('fa-')){
 			iname.split(' ').forEach(iconClass => {
 				iel.classList.add(iconClass)
 			})
