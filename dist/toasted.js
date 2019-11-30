@@ -650,10 +650,10 @@ var createIcon = function createIcon(options, toast) {
 
 		var iel = document.createElement('i');
 		iel.setAttribute('aria-hidden', 'true');
-		var iname = options.icon.name ? options.icon.name : options.icon;
+		var iname = options.icon;
 
 		// fontawesome and material icon are only useable
-		if (iname.includes('fas')) {
+		if (iname.includes('fa-')) {
 			iname.split(' ').forEach(function (iconClass) {
 				iel.classList.add(iconClass);
 			});
